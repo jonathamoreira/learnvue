@@ -3,6 +3,7 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const morgan = require("morgan");
 
+
 const app = express();
 
 //===> Import file: db.config.js
@@ -16,10 +17,11 @@ mongoose
     //useNewUrlParser: true,
     //useUnifiedTopology: true,
     //useCreateIndex: true,
+    family: 4// auxilio a conexão com o MDb
   })
   .then(
     () => {
-      console.log("Base de dados conectada");
+      console.log("Base de dados conectada")
     },
     (err) => {
       console.log("Erro ao conectar a base de dados" + err);
@@ -29,7 +31,7 @@ mongoose
 
 // ===>>>Rotas da API
 const index = require("./routes/index");
-//TODO: Declarar rota user.routes.js
+const userRoutes = require('./routes/user.routes')
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -38,6 +40,7 @@ app.use(cors());
 app.use(morgan("dev"));
 
 app.use(index);
+app.use('/api/v1', userRoutes)
 // Incluir depois chamada da rota use.routes.js
 
 module.exports = app;
