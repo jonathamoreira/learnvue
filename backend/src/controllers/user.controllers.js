@@ -3,7 +3,7 @@ const user = require('../models/user.models')
 
 //===> Async Await
 
-//===> Método responsável
+//===> Método responsável por criar novo usuario
 exports.registerNewUser = async (req, res)=>{
     try {
         let isUser = await User.find({ email: req.body.email })
@@ -20,11 +20,25 @@ exports.registerNewUser = async (req, res)=>{
         res.status(400).json({ err: err})
     }
 }
-//toDo
+//=== Login 
 exports.loginUser = async (req, res)=>{
+    try {
+        const email =req.body.email
+        const password = req.body.password
+        const user = await User.findByCredentials(email, password)
 
+        if (!user){
+            return res.status(401).json({ error: 'Erro ao realizar o Login'})
+        }
+
+        const token = await user.generateAuthToken()
+        res.status(201).json({ message: 'Usuário logado com sucesso!', user, token})
+        
+    } catch (err) {
+        res.status(400).json({ err: err})
+    }
 }
 //toDo
 exports.returnUserProfile = async (req, res)=>{
-    
+    await res.json(req.userData)
 }
