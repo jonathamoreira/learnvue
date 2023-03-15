@@ -1,33 +1,8 @@
 const express = require("express");
 const cors = require("cors");
-const mongoose = require("mongoose");
 const morgan = require("morgan");
-
-
+const mongooseConnection = require('./config/mongooseConnect.config')
 const app = express();
-
-//===> Import file: db.config.js
-const database = require("./config/db.config");//conexão local mongoDb
-
-mongoose.Promise = global.Promise;
-
-//===> Connect databases
-mongoose
-  .connect(database.local.localDatabaseUrl, {
-    //useNewUrlParser: true,
-    //useUnifiedTopology: true,
-    //useCreateIndex: true,
-    family: 4// auxilio a conexão com o MDb
-  })
-  .then(
-    () => {
-      console.log("Base de dados conectada")
-    },
-    (err) => {
-      console.log("Erro ao conectar a base de dados" + err);
-      process.exit();
-    }
-  );
 
 // ===>>>Rotas da API
 const index = require("./routes/index");
@@ -39,8 +14,9 @@ app.use(express.json({ type: "application/vnd.api+json" }));
 app.use(cors());
 app.use(morgan("dev"));
 
+app.set('mongoose connection', mongooseConnection)
+
 app.use(index);
 app.use('/api/v1', userRoutes)
-// Incluir depois chamada da rota use.routes.js
 
 module.exports = app;
