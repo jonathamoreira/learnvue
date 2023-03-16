@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import App from './App.vue';
 import router from './router';
 
-//Vue.use();
+// Vue.use();
 
 Vue.config.productionTip = false;
 
