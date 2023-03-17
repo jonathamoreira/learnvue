@@ -1,6 +1,7 @@
 // Lógica do componente
-
+import swal from 'sweetalert';
 import { required } from 'vuelidate/lib/validators';
+import LoginService from '@/services/LoginService';
 
 export default {
   name: 'LoginComponent',
@@ -21,15 +22,29 @@ export default {
     },
   },
   methods: {
-    loginSubmitUserForm() {
-      this.isSubmitted = true;
+    loginSubmitUserForm() {},
+    async submitLoginUser() {
+      try {
+        this.isSubmitted = true;
 
-      this.$v.$touch();
-      if (this.$v.$invalid) {
-        return;
+        this.$v.$touch();
+        if (this.$v.$invalid) {
+          swal({
+            title: 'Oops!',
+            text: 'Você precisa incluir todos os campos!',
+            icon: 'error',
+          });
+          return;
+        }
+        await LoginService.loginUser(this.loginForm);
+        this.$router.push('/home');
+      } catch (error) {
+        swal({
+          title: 'Oops!',
+          text: 'Senha incorreta!',
+          icon: 'error',
+        });
       }
-      alert('SUCCESS!' + JSON.stringify(this.loginForm));
     },
-    async submitLoginUser() {},
   },
 };

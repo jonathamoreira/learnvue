@@ -11,6 +11,7 @@ module.exports = {
     parser: 'babel-eslint',
   },
   rules: {
+    'vuejs-accessibility/click-events-have-key-events': 'off',
     'vue/multi-word-component-names': 'off',
     'import/no-unresolved': 'off',
     'vue/no-unused-components': 'off',

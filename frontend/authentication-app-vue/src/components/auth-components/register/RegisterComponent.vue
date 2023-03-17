@@ -17,7 +17,16 @@
           class="form-control mb-3"
           placeholder="Digite seu Nome"
           v-model="registerForm.name"
+          :class="{
+                  'is-invalid': isSubmitted && $v.registerForm.name.$error,
+                }"
             />
+            <div
+            v-if="isSubmitted && !$v.registerForm.name.required"
+            class="invalid-feedback"
+            >
+                O campo nome é obrigatório!
+            </div>
           </div>
           <!--FIM DO BLOCO: NOME-->
          <!--INÍCIO BLOCO: E-mail-->
@@ -30,7 +39,17 @@
           class="form-control mb-3"
           placeholder="Digite seu E-mail"
           v-model="registerForm.email"
+          :class="{
+                  'is-invalid': isSubmitted && $v.registerForm.email.$error,
+                }"
             />
+            <div
+            v-if="isSubmitted && !$v.registerForm.email.required"
+            class="invalid-feedback"
+            >
+               <span v-if="!v.registerForm.email.required"> O campo email é obrigatório!</span>
+               <span v-if="!v.registerForm.email.email"> E-mail inválido! Tente novamente</span>
+            </div>
           </div>
           <!--FIM DO BLOCO: E-MAIL-->
 
@@ -44,8 +63,23 @@
           class="form-control mb-3"
           placeholder="Digite sua Senha"
           v-model="registerForm.password"
-          />
-        </div>
+          :class="{
+                  'is-invalid': isSubmitted && $v.registerForm.password.$error,
+                }"
+            />
+            <div
+            v-if="isSubmitted && !$v.registerForm.password.required"
+            class="invalid-feedback"
+            >
+            <span v-if="!v.registerForm.password.required">
+              O campo senha é obrigatório!>
+            </span>
+            <span v-if="!v.registerForm.password.minLength">
+              A senha deve conter no mínimo 6 caracteres!>
+            </span>
+            </div>
+
+          </div>
 
           <!--FIM DO BLOCO: PASSWORD-->
 
