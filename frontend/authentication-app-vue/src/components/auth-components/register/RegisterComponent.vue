@@ -8,38 +8,44 @@
           v-on:submit.prevent="registerSubmitUserForm()"
         >
         <!--INÍCIO BLOCO: NOME-->
-        
+        <div class="form-group">
         <input
+          aria-label="name"
           type="text"
           name="name"
           id="name"
           class="form-control mb-3"
           placeholder="Digite seu Nome"
           v-model="registerForm.name"
-            ><label for="name"></label><br>
+            />
+          </div>
           <!--FIM DO BLOCO: NOME-->
          <!--INÍCIO BLOCO: E-mail-->
-         
+         <div class="form-group">
           <input
+          aria-label="email"
           type="email"
           name="email"
           id="email"
           class="form-control mb-3"
           placeholder="Digite seu E-mail"
           v-model="registerForm.email"
-            ><label for="email"></label><br>
+            />
+          </div>
           <!--FIM DO BLOCO: E-MAIL-->
 
          <!--INÍCIO BLOCO: PASSWORD-->
-         
+         <div class="form-group">
          <input
+          aria-label="password"
           type="password"
           name="password"
           id="password"
           class="form-control mb-3"
           placeholder="Digite sua Senha"
           v-model="registerForm.password"
-          ><label for="password"></label>
+          />
+        </div>
 
           <!--FIM DO BLOCO: PASSWORD-->
 
